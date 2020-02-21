@@ -1,17 +1,22 @@
 import datetime
 import random
 
-def printStats(playedSongs, perc):
-    print(str(datetime.datetime.now().time()) + ";" + str(playedSongs) + ";" + str(round(perc, 2)))
+def printStats(playtime, playedSongs, perc):
+    print(str(round(playtime)) + ";" + str(playedSongs) + ";" + str(round(perc, 2)))
 
 numberOfSongs = 8226
+playlistLengthInMinutes = 33846
 playedSongs = [0] * numberOfSongs
 
 numberOfPlayedSongs = 0
 counter = 0
+playtime = 0
+
+averageSongDuration = playlistLengthInMinutes / numberOfSongs
 
 while numberOfPlayedSongs < numberOfSongs:
     randIndex = random.randrange(numberOfSongs)
+    playtime += averageSongDuration
 
     if playedSongs[randIndex] == 0:
         counter += 1
@@ -22,7 +27,6 @@ while numberOfPlayedSongs < numberOfSongs:
 
     if counter == 50:
         counter = 0
-        printStats(numberOfPlayedSongs, percentage)
+        printStats(playtime, numberOfPlayedSongs, percentage)
 
-printStats(numberOfPlayedSongs, percentage)
-
+printStats(playtime, numberOfPlayedSongs, percentage)
